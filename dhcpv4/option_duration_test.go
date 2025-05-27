@@ -104,22 +104,21 @@ func TestOptIPv6OnlyPreferredZero(t *testing.T) {
 
 func TestGetIPv6OnlyPreferred(t *testing.T) {
 	m, _ := New(WithGeneric(OptionIPv6OnlyPreferred, []byte{0, 0, 168, 192}))
-	v6onlyWait, ok := m.IPv6OnlyPreferred()
-	require.True(t, ok)
+	v6onlyWait := m.IPv6OnlyPreferred(0)
 	require.Equal(t, 43200*time.Second, v6onlyWait)
 
 	// Too short.
 	m, _ = New(WithGeneric(OptionIPv6OnlyPreferred, []byte{168, 192}))
-	_, ok = m.IPv6OnlyPreferred()
-	require.False(t, ok)
+	v6onlyWait = m.IPv6OnlyPreferred(0)
+	require.Equal(t, time.Duration(0), v6onlyWait)
 
 	// Too long.
 	m, _ = New(WithGeneric(OptionIPv6OnlyPreferred, []byte{1, 1, 1, 1, 1}))
-	_, ok = m.IPv6OnlyPreferred()
-	require.False(t, ok)
+	v6onlyWait = m.IPv6OnlyPreferred(0)
+	require.Equal(t, time.Duration(0), v6onlyWait)
 
 	// Missing.
 	m, _ = New()
-	_, ok = m.IPv6OnlyPreferred()
-	require.False(t, ok)
+	v6onlyWait = m.IPv6OnlyPreferred(0)
+	require.Equal(t, time.Duration(0), v6onlyWait)
 }

@@ -60,6 +60,8 @@ func ParseOption(code OptionCode, optData []byte) (Option, error) {
 		opt = &OptIAAddress{}
 	case OptionORO:
 		opt = &optRequestedOption{}
+	case OptionPreference:
+		opt = &OptPreference{}
 	case OptionElapsedTime:
 		opt = &optElapsedTime{}
 	case OptionRelayMsg:
@@ -88,6 +90,8 @@ func ParseOption(code OptionCode, optData []byte) (Option, error) {
 		opt = &OptRemoteID{}
 	case OptionFQDN:
 		opt = &OptFQDN{}
+	case OptionCAPWAPAccessControllerAddresses:
+		opt = &optCAPWAPAccessControllerAddresses{}
 	case OptionNTPServer:
 		opt = &OptNTPServer{}
 	case OptionBootfileURL:

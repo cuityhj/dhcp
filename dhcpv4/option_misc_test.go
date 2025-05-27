@@ -3,8 +3,8 @@ package dhcpv4
 import (
 	"testing"
 
-	"github.com/insomniacslk/dhcp/iana"
-	"github.com/insomniacslk/dhcp/rfc1035label"
+	"github.com/cuityhj/dhcp/iana"
+	"github.com/cuityhj/dhcp/rfc1035label"
 	"github.com/stretchr/testify/require"
 )
 

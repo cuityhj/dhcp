@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/insomniacslk/dhcp/rfc1035label"
+	"github.com/cuityhj/dhcp/rfc1035label"
 	"github.com/stretchr/testify/require"
 	"github.com/u-root/uio/uio"
 )
@@ -84,5 +84,5 @@ func TestOptFQDNString(t *testing.T) {
 			Labels: []string{"cnos.localhost"},
 		},
 	}
-	require.Equal(t, "FQDN: {Flags=0 DomainName=[cnos.localhost]}", opt.String())
+	require.Equal(t, "FQDN: {Flags=0 DomainName=cnos.localhost}", opt.String())
 }

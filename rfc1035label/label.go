@@ -2,7 +2,6 @@ package rfc1035label
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -36,7 +35,7 @@ func same(a, b []string) bool {
 
 // String prints labels.
 func (l *Labels) String() string {
-	return fmt.Sprintf("%v", l.Labels)
+	return strings.Join(l.Labels, ",")
 }
 
 // ToBytes returns a byte sequence representing the labels. If the original

@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/insomniacslk/dhcp/rfc1035label"
+	"github.com/cuityhj/dhcp/rfc1035label"
 	"github.com/stretchr/testify/require"
 	"github.com/u-root/uio/uio"
 )
@@ -80,5 +80,5 @@ func TestOptDomainSearchListString(t *testing.T) {
 			"subnet.example.org",
 		},
 	})
-	require.Contains(t, opt.String(), "example.com subnet.example.org", "String() should contain the correct domain search output")
+	require.Contains(t, opt.String(), "example.com,subnet.example.org", "String() should contain the correct domain search output")
 }

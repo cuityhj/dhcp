@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/hugelgupf/socketpair"
-	"github.com/insomniacslk/dhcp/dhcpv4"
-	"github.com/insomniacslk/dhcp/dhcpv4/server4"
+	"github.com/cuityhj/dhcp/dhcpv4"
+	"github.com/cuityhj/dhcp/dhcpv4/server4"
 )
 
 type testLeaseKey struct {

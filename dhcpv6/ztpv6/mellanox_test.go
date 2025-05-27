@@ -3,8 +3,8 @@ package ztpv6
 import (
 	"testing"
 
-	"github.com/insomniacslk/dhcp/dhcpv6"
-	"github.com/insomniacslk/dhcp/iana"
+	"github.com/cuityhj/dhcp/dhcpv6"
+	"github.com/cuityhj/dhcp/iana"
 	"github.com/stretchr/testify/require"
 )
 

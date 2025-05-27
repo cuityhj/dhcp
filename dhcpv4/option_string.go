@@ -1,5 +1,11 @@
 package dhcpv4
 
+import (
+	"unicode/utf8"
+
+	"golang.org/x/text/encoding/simplifiedchinese"
+)
+
 // String represents an option encapsulating a string in IPv4 DHCP.
 //
 // This representation is shared by multiple options specified by RFC 2132,
@@ -23,12 +29,36 @@ func (o *String) FromBytes(data []byte) error {
 }
 
 // GetString parses an RFC 2132 string from o[code].
+//
+// remove \x00 and \u0000
 func GetString(code OptionCode, o Options) string {
 	v := o.Get(code)
 	if v == nil {
 		return ""
 	}
-	return string(v)
+	return RemoveU0000(string(v))
+}
+
+// GetChineseString parse an RFC 2132 string from o[code].
+//
+// First, check if it is a UTF-8 string, if not, parse the string using GB18030.
+//
+// Second, if GB18030 cannot parse or if it is already UTF-8, forcefully convert it to a string.
+//
+// Finally, remove \x00 and \u0000
+func GetChineseString(code OptionCode, o Options) string {
+	v := o.Get(code)
+	if v == nil {
+		return ""
+	}
+
+	if !utf8.Valid(v) {
+		if decodeBytes, err := simplifiedchinese.GB18030.NewDecoder().Bytes(v); err == nil {
+			return RemoveU0000(string(decodeBytes))
+		}
+	}
+
+	return RemoveU0000(string(v))
 }
 
 // OptDomainName returns a new DHCPv4 Domain Name option.

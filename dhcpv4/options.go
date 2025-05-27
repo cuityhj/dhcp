@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/insomniacslk/dhcp/iana"
-	"github.com/insomniacslk/dhcp/rfc1035label"
+	"github.com/cuityhj/dhcp/iana"
+	"github.com/cuityhj/dhcp/rfc1035label"
 	"github.com/u-root/uio/uio"
 )
 
@@ -311,7 +311,8 @@ type OptionDecoder interface {
 func getOption(code OptionCode, data []byte, vendorDecoder OptionDecoder) fmt.Stringer {
 	var d OptionDecoder
 	switch code {
-	case OptionRouter, OptionDomainNameServer, OptionNTPServers, OptionServerIdentifier:
+	case OptionRouter, OptionDomainNameServer, OptionNTPServers, OptionServerIdentifier,
+		OptionCAPWAPAccessControllerAddresses:
 		d = &IPs{}
 
 	case OptionBroadcastAddress, OptionRequestedIPAddress:
@@ -341,6 +342,9 @@ func getOption(code OptionCode, data []byte, vendorDecoder OptionDecoder) fmt.St
 
 	case OptionDNSDomainSearchList:
 		d = &rfc1035label.Labels{}
+
+	case OptionFQDN:
+		d = &FQDN{}
 
 	case OptionIPAddressLeaseTime, OptionRenewTimeValue,
 		OptionRebindingTimeValue, OptionIPv6OnlyPreferred, OptionArpCacheTimeout,

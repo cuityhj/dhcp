@@ -158,8 +158,7 @@ func TestWithIPv6OnlyPreferred(t *testing.T) {
 	d, err := New(WithIPv6OnlyPreferred(300))
 	require.NoError(t, err)
 
-	v6pref, ok := d.IPv6OnlyPreferred()
-	require.True(t, ok)
+	v6pref := d.IPv6OnlyPreferred(0)
 	require.Equal(t, 300*time.Second, v6pref)
 }
 

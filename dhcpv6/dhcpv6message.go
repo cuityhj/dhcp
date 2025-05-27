@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/insomniacslk/dhcp/iana"
-	"github.com/insomniacslk/dhcp/rfc1035label"
+	"github.com/cuityhj/dhcp/iana"
+	"github.com/cuityhj/dhcp/rfc1035label"
 	"github.com/u-root/uio/rand"
 	"github.com/u-root/uio/uio"
 )
@@ -163,6 +163,19 @@ func (mo MessageOptions) DNS() []net.IP {
 	return nil
 }
 
+// CAPWAPAccessControllerAddresses returns the CAPWAP Access Controller Address List option
+// as defined by RFC 5417
+func (mo MessageOptions) CAPWAPAccessControllerAddresses() []net.IP {
+	opt := mo.Options.GetOne(OptionCAPWAPAccessControllerAddresses)
+	if opt == nil {
+		return nil
+	}
+	if capwap, ok := opt.(*optCAPWAPAccessControllerAddresses); ok {
+		return capwap.Addresses
+	}
+	return nil
+}
+
 // DomainSearchList returns the Domain List option as defined by RFC 3646.
 func (mo MessageOptions) DomainSearchList() *rfc1035label.Labels {
 	opt := mo.Options.GetOne(OptionDomainSearchList)
@@ -284,6 +297,18 @@ func (mo MessageOptions) ElapsedTime() time.Duration {
 	}
 	if t, ok := opt.(*optElapsedTime); ok {
 		return t.ElapsedTime
+	}
+	return 0
+}
+
+// Preference returns the Preference option as defined by RFC 8415
+func (mo MessageOptions) Preference() uint8 {
+	opt := mo.Options.GetOne(OptionPreference)
+	if opt == nil {
+		return 0
+	}
+	if t, ok := opt.(*OptPreference); ok {
+		return t.PrefValue
 	}
 	return 0
 }
