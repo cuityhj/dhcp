@@ -49,7 +49,7 @@ type FQDN struct {
 }
 
 // FromBytes parses a a single byte into FQDN.
-func (fqdn *FQDN) FromBytes(data []byte) (err error) {
+func (fqdn *FQDN) FromBytes(data []byte) error {
 	buf := uio.NewBigEndianBuffer(data)
 	fqdn.Flags = buf.Read8()
 	fqdn.Rcode1 = buf.Read8()

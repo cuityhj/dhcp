@@ -176,6 +176,18 @@ func (mo MessageOptions) CAPWAPAccessControllerAddresses() []net.IP {
 	return nil
 }
 
+func (mo MessageOptions) V6Prefix64() *OptV6Prefix64 {
+	opt := mo.Options.GetOne(OptionV6Prefix64)
+	if opt == nil {
+		return nil
+	}
+
+	if prefix64, ok := opt.(*OptV6Prefix64); ok {
+		return prefix64
+	}
+	return nil
+}
+
 // DomainSearchList returns the Domain List option as defined by RFC 3646.
 func (mo MessageOptions) DomainSearchList() *rfc1035label.Labels {
 	opt := mo.Options.GetOne(OptionDomainSearchList)
