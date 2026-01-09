@@ -18,7 +18,11 @@ const (
 //      [RFC6052], the unicast-length MUST be one of 32, 40, 48, 56, 64,
 //      or 96.  This field represents the number of valid leading bits in
 //      the prefix.
-var ValidUnicastLength = map[uint8]bool{
+func ValidUnicastLength(l uint8) bool {
+	return validUnicastLength[l]
+}
+
+var validUnicastLength = map[uint8]bool{
 	32: true,
 	40: true,
 	48: true,
@@ -136,7 +140,7 @@ func (o *OptV6Prefix64) FromBytes(data []byte) error {
 	o.SsmMPrefix64 = ipnetFromIpBytes(buf.CopyN(MULTICAST_PREFIX64_LENGTH), MULTICAST_PREFIX64_BITS)
 
 	o.UnicastLength = buf.Read8()
-	if valid := ValidUnicastLength[o.UnicastLength]; !valid {
+	if valid := validUnicastLength[o.UnicastLength]; !valid {
 		return fmt.Errorf("invalid unicast length %d, not in [32, 40, 48, 56, 64, 96]", o.UnicastLength)
 	}
 

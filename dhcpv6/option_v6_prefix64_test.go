@@ -58,6 +58,10 @@ func TestV6Prefix64(t *testing.T) {
 				t.Errorf("Prefixes = %#v, want %#v", prefix64, tt.want)
 			}
 
+			if prefix64 != nil && !ValidUnicastLength(prefix64.UnicastLength) {
+				t.Errorf("Prefix size %#v not in [32, 40, 48, 56, 64, 96]", prefix64.UnicastLength)
+			}
+
 			if tt.want != nil {
 				var b MessageOptions
 				b.Add(tt.want)
