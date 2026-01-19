@@ -708,6 +708,13 @@ func (d *DHCPv4) ClientArch() []iana.Arch {
 	return archs
 }
 
+// CaptivePortal returns the captive portal url if present.
+//
+// The Captive Portal option is described by RFC 8910, Section 2.1.
+func (d *DHCPv4) CaptivePortal() string {
+	return GetString(OptionURL, d.Options)
+}
+
 // DomainSearch returns the domain search list if present.
 //
 // The domain search option is described by RFC 3397, Section 2.

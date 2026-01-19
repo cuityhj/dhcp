@@ -114,10 +114,12 @@ func ParseOption(code OptionCode, optData []byte) (Option, error) {
 		opt = &Opt4RDMapRule{}
 	case Option4RDNonMapRule:
 		opt = &Opt4RDNonMapRule{}
-	case OptionRelayPort:
-		opt = &optRelayPort{}
+	case OptionCaptivePortal:
+		opt = &optCaptivePortal{}
 	case OptionV6Prefix64:
 		opt = &OptV6Prefix64{}
+	case OptionRelayPort:
+		opt = &optRelayPort{}
 	default:
 		opt = &OptionGeneric{OptionCode: code}
 	}

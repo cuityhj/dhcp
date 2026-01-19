@@ -112,3 +112,10 @@ func OptUserClass(name string) Option {
 func OptMessage(msg string) Option {
 	return Option{Code: OptionMessage, Value: String(msg)}
 }
+
+//OptCaptivePortal returns a new DHCP Captive Portal option
+//
+// The Captive Portal option is described by RFC 8910, Section 2.1.
+func OptCaptivePortal(url string) Option {
+	return Option{Code: OptionURL, Value: String(url)}
+}

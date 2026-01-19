@@ -122,3 +122,10 @@ func TestParseOptUserClass(t *testing.T) {
 	m, _ = New()
 	require.Equal(t, 0, len(m.UserClass()))
 }
+
+func TestOptCaptivePortal(t *testing.T) {
+	o := OptCaptivePortal("https://portal.com/login")
+	require.Equal(t, OptionURL, o.Code, "Code")
+	require.Equal(t, []byte{'h', 't', 't', 'p', 's', ':', '/', '/', 'p', 'o', 'r', 't', 'a', 'l', '.', 'c', 'o', 'm', '/', 'l', 'o', 'g', 'i', 'n'}, o.Value.ToBytes(), "ToBytes")
+	require.Equal(t, "URL: https://portal.com/login", o.String())
+}

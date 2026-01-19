@@ -333,7 +333,7 @@ func getOption(code OptionCode, data []byte, vendorDecoder OptionDecoder) fmt.St
 
 	case OptionHostName, OptionDomainName, OptionRootPath,
 		OptionClassIdentifier, OptionTFTPServerName, OptionBootfileName,
-		OptionMessage, OptionReferenceToTZDatabase:
+		OptionMessage, OptionReferenceToTZDatabase, OptionURL:
 		var s String
 		d = &s
 

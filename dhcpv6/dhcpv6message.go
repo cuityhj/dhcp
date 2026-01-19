@@ -176,6 +176,19 @@ func (mo MessageOptions) CAPWAPAccessControllerAddresses() []net.IP {
 	return nil
 }
 
+// CaptivePortal returns a captive portal url as defined by RFC 8910. section 2.2.
+func (mo MessageOptions) CaptivePortal() string {
+	opt := mo.Options.GetOne(OptionCaptivePortal)
+	if opt == nil {
+		return ""
+	}
+	if portal, ok := opt.(*optCaptivePortal); ok {
+		return portal.url
+	}
+	return ""
+}
+
+// V6Prefix64 return the v6 prefix64 option as defined by RFC 8115.
 func (mo MessageOptions) V6Prefix64() *OptV6Prefix64 {
 	opt := mo.Options.GetOne(OptionV6Prefix64)
 	if opt == nil {
